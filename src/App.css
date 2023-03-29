@@ -1,0 +1,100 @@
+.page {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: center;
+}
+
+.container {
+  position: relative;
+  display: flex;
+  height: 500px;
+  width: 500px;
+  border-radius: 50%;
+  flex-direction: column;
+  align-content: center;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(
+    circle,
+    rgba(80, 38, 219, 1) 2%,
+    rgba(41, 94, 139, 1) 50%,
+    rgba(80, 38, 219, 1) 98%
+  );
+}
+
+.timeWrp {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  font-size: 60px;
+}
+.perc {
+  width: 500px;
+}
+.line {
+  width: 100%;
+  border-bottom: 1px solid blue;
+}
+
+.text {
+  margin: 0;
+  color: pink;
+  font-size: 100px;
+  line-height: 100px;
+  font-family: "Merienda", cursive;
+  font-weight: 900;
+}
+
+.settingsBtn {
+  background: none;
+  border: none;
+  margin-top: 40px;
+  margin-bottom: 20px;
+}
+
+.settingsWrp {
+  transition: 1s;
+}
+.hidden {
+  transition: 1s;
+}
+
+.buttonsWrp {
+  display: flex;
+  flex-direction: column;
+}
+
+.timerBtn {
+  margin-right: 11px;
+  color: white;
+  font-size: 23px;
+  background: none;
+  border: 1px solid #643865b8;
+}
+
+.timerBtn:hover,
+.timerBtn:focus {
+  animation: pulse 1s;
+  box-shadow: 0 0 0 2em transparent;
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 #643865b8;
+  }
+}
+
+.btnText {
+  margin: 5px 12px;
+  text-transform: uppercase;
+}
+
+.progressBar {
+  position: absolute;
+  width: 557px;
+  z-index: -1;
+  transition: 10s;
+}
