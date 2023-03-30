@@ -86,7 +86,8 @@ export const App = () => {
     }
   };
   const handlePause = () => {
-    setStarted(false), setPause(true);
+    setStarted(false);
+    setPause(true);
   };
   return (
     <>
