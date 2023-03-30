@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/tr1pless/pomodoro-react/static/css/main.f266d558.css",
+    "main.js": "/tr1pless/pomodoro-react/static/js/main.0bac407b.js",
+    "index.html": "/tr1pless/pomodoro-react/index.html",
+    "main.f266d558.css.map": "/tr1pless/pomodoro-react/static/css/main.f266d558.css.map",
+    "main.0bac407b.js.map": "/tr1pless/pomodoro-react/static/js/main.0bac407b.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.f266d558.css",
+    "static/js/main.0bac407b.js"
+  ]
+}
