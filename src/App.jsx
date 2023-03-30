@@ -1,6 +1,6 @@
 import styles from "./App.css";
 import React, { useEffect, useState } from "react";
-import { settings } from "./constants";
+import { pauseSvg, play, settings } from "./constants";
 import { buildStyles, CircularProgressbar } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 
@@ -12,11 +12,16 @@ export const App = () => {
   const [step, setStep] = useState(0);
   const [timeToSec, setTimeToSec] = useState(0);
   const [hide, setHide] = useState(true);
-  const [pause, setPause] = useState("Pause");
+  const [pause, setPause] = useState(false);
+  const [afterPause, setAfterPause] = useState(0);
 
   useEffect(() => {
     if (seconds >= 1 || minutes >= 1) {
-      setTimeToSec(minutes * 60 + seconds);
+      if (!pause) {
+        setTimeToSec(minutes * 60 + seconds);
+      } else {
+        setAfterPause(minutes * 60 + seconds);
+      }
     }
   }, [minutes, seconds]);
 
@@ -37,6 +42,7 @@ export const App = () => {
       setStarted(false);
       const timeout = setTimeout(() => {
         setProgress(0);
+        setHide(false);
       }, 3000);
     }
 
@@ -50,88 +56,134 @@ export const App = () => {
   });
 
   const handleTime = (m, s) => {
-    setMinutes(minutes + m);
-    setSeconds(seconds + s);
-  };
-
-  const handleStart = () => {
-    let s = 100 / timeToSec;
-    if (timeToSec > 0 && started != true && progress == 0) {
-      setStep(s);
-      setStarted(true);
-      setProgress(0);
+    if (started) {
+      return;
     } else {
-      setProgress(progress);
-      setStarted(true);
-      setStep(step);
+      setMinutes(minutes + m);
+      setSeconds(seconds + s);
     }
   };
 
-  // const pauseHandler = () => {
-  // if (!started) {
-  // setStarted(true);
-  // setPause("pause");
-  // } else {
-  // setStarted(false);
-  // setPause("unpause");
-  // }
-  // };
+  const handleStart = () => {
+    if (timeToSec) {
+      let s = 100 / timeToSec;
+      setPause(false);
+      if (timeToSec > 0 && started != true && progress == 0) {
+        setStep(s);
+        setStarted(true);
+        setProgress(0);
+      } else if (pause && afterPause > timeToSec) {
+        setStep(s);
+        setStarted(true);
+        setProgress(0);
+      } else {
+        setProgress(progress);
+        setStarted(true);
+        setStep(step);
+      }
+    } else {
+      return;
+    }
+  };
+
   return (
     <>
       <section className="page">
-        <div className="container">
-          <div className="perc"></div>
-          <div className="timeWrp">
-            <p className="text">{minutes <= 9 ? `0${minutes}` : minutes}</p>
-            <span className="text">:</span>
-            <p className="text">{seconds <= 9 ? `0${seconds}` : seconds}</p>
-          </div>
-          <div className="buttonsWrp">
-            <button className="settingsBtn" onClick={() => setHide(!hide)}>
-              {settings}
-            </button>
-            <div className={hide ? "hidden" : "settingsWrp"}>
-              <button
-                className="timerBtn"
-                onClick={() => {
-                  handleTime(1, 0);
-                }}
-              >
-                <p className="btnText">+1M</p>
+        <div className="timeWrpBg">
+          <div className="container">
+            <div className="perc"></div>
+
+            <div
+              className="timeWrp"
+              style={hide ? { marginTop: "180px" } : null}
+            >
+              <p className="text">{minutes <= 9 ? `0${minutes}` : minutes}</p>
+              <span className="text">:</span>
+              <p className="text">{seconds <= 9 ? `0${seconds}` : seconds}</p>
+            </div>
+            <div className="buttonsWrp">
+              <button className="settingsBtn" onClick={() => setHide(!hide)}>
+                {settings}
               </button>
-              <button
-                className="timerBtn"
-                onClick={() => {
-                  handleTime(0, 15);
-                }}
-              >
-                <p className="btnText">+15S</p>
-              </button>
-              <button
-                className="timerBtn"
-                onClick={() => {
-                  handleStart();
-                }}
-              >
-                <p className="btnText">start</p>
-              </button>
-              <button
-                style={{ marginRight: "0" }}
-                className="timerBtn"
-                onClick={() => {
-                  setStarted(false);
-                }}
-              >
-                <p className="btnText">stop</p>
-              </button>
+              <div className="settingsWrp">
+                <button
+                  className={
+                    hide ? "timerBtn" + " " + "hButtonLeft" : "timerBtn"
+                  }
+                  onClick={() => {
+                    handleTime(30, 0);
+                  }}
+                >
+                  +30M
+                </button>
+
+                <button
+                  className={
+                    hide ? "timerBtn" + " " + "hButtonLeft" : "timerBtn"
+                  }
+                  onClick={() => {
+                    handleTime(10, 0);
+                  }}
+                >
+                  +10M
+                </button>
+
+                <button
+                  className={
+                    hide ? "timerBtn" + " " + "hButtonLeft" : "timerBtn"
+                  }
+                  onClick={() => {
+                    handleTime(5, 0);
+                  }}
+                >
+                  +5M
+                </button>
+                <button
+                  className={
+                    hide ? "timerBtn" + " " + "hButtonRight" : "timerBtn"
+                  }
+                  onClick={() => {
+                    handleTime(0, 30);
+                  }}
+                >
+                  +30S
+                </button>
+                <button
+                  className={
+                    hide ? "timerBtn" + " " + "hButtonRight" : "timerBtn"
+                  }
+                  onClick={() => {
+                    handleStart();
+                  }}
+                >
+                  {play}
+                </button>
+                <button
+                  style={{ marginRight: "0" }}
+                  className={
+                    hide ? "timerBtn" + " " + "hButtonRight" : "timerBtn"
+                  }
+                  onClick={() => {
+                    setStarted(false), setPause(true);
+                  }}
+                >
+                  {pauseSvg}
+                </button>
+              </div>
             </div>
           </div>
-        </div>
-        <div className="progressBar">
-          <CircularProgressbar
-            value={progress}
-            styles={buildStyles({ pathTransitionDuration: 1 })}
-          />
+          <div className="progressBar">
+            <CircularProgressbar
+              strokeWidth={4}
+              value={progress}
+              styles={buildStyles({
+                pathTransitionDuration: 1,
+                pathColor: `rgb(30 208 175 / 44%)`,
+                trailColor: "none",
+                strokeWidth: "4",
+              })}
+            />
+          </div>
         </div>
       </section>
     </>

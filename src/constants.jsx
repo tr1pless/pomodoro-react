@@ -2,6 +2,7 @@ import React from "react";
 
 export const settings = (
   <svg
+    style={{ transform: "scale(1.4)", fill: "#d7f1eb" }}
     width="24"
     height="24"
     xmlns="http://www.w3.org/2000/svg"
@@ -13,3 +14,27 @@ export const settings = (
 );
 
 export const sun = <img src="" alt="" />;
+
+export const pauseSvg = (
+  <svg
+    fill=" pink"
+    xmlns="http://www.w3.org/2000/svg"
+    width="24"
+    height="24"
+    viewBox="0 0 24 24"
+  >
+    <path d="M11 22h-4v-20h4v20zm6-20h-4v20h4v-20z" />
+  </svg>
+);
+
+export const play = (
+  <svg
+    fill=" pink"
+    xmlns="http://www.w3.org/2000/svg"
+    width="24"
+    height="24"
+    viewBox="0 0 24 24"
+  >
+    <path d="M12 2c5.514 0 10 4.486 10 10s-4.486 10-10 10-10-4.486-10-10 4.486-10 10-10zm0-2c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm-3 17v-10l9 5.146-9 4.854z" />
+  </svg>
+);
