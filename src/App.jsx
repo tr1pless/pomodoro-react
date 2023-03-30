@@ -85,7 +85,9 @@ export const App = () => {
       return;
     }
   };
-
+  const handlePause = () => {
+    setStarted(false), setPause(true);
+  };
   return (
     <>
       <section className="page">
@@ -164,7 +166,7 @@ export const App = () => {
                     hide ? "timerBtn" + " " + "hButtonRight" : "timerBtn"
                   }
                   onClick={() => {
-                    setStarted(false), setPause(true);
+                    handlePause();
                   }}
                 >
                   {pauseSvg}
