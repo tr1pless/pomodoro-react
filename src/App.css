@@ -18,7 +18,7 @@ body {
   flex-wrap: nowrap;
   align-items: center;
   justify-content: center;
-  font-family: "Merienda", cursive;
+  font-family: 'Merienda', cursive;
 }
 
 .container {
@@ -33,6 +33,7 @@ body {
   overflow: hidden;
 }
 .timeWrpBg {
+  overflow: hidden;
   box-shadow: 15px -8px 26px 12px #111919 inset,
     -12px -11px 58px -8px #0e0d13 inset;
   height: 600px;
@@ -67,7 +68,7 @@ body {
   color: pink;
   font-size: 100px;
   line-height: 100px;
-  font-family: "Merienda", cursive;
+  font-family: 'Merienda', cursive;
   font-weight: 900;
 }
 
@@ -102,7 +103,7 @@ body {
   background: none;
   border: none;
   transition: 0.7s;
-  font-family: "Merienda", cursive;
+  font-family: 'Merienda', cursive;
 }
 
 .timerBtn:hover,
