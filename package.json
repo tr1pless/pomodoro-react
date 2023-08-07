@@ -1,6 +1,5 @@
 {
   "name": "pomodoro-react",
-  "homepage": "https://github.com/tr1pless/pomodoro-react/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -15,7 +14,7 @@
   },
   "scripts": {
     "predeploy": "npm run build",
-   "deploy": "gh-pages -d build",
+    "deploy": "gh-pages -d build",
     "start": "webpack serve --mode=development",
     "build": "react-scripts build",
     "test": "react-scripts test",
